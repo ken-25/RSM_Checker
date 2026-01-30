@@ -1,0 +1,371 @@
+:root {
+    /* Colors */
+    --bg-color: #f0f2f5;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --border-color: #e5e7eb;
+    --input-bg: #f9fafb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    overflow: hidden;
+    /* Prevent body scroll because sidebar/viewer handle it */
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Header */
+.app-header {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.app-header h2 {
+    margin: 0 0 var(--space-xs) 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.app-header .subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Sidebar / UI Panel */
+#ui {
+    width: 340px;
+    padding: var(--space-lg);
+    box-sizing: border-box;
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow-y: auto;
+    border-right: 1px solid var(--border-color);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+#viewer {
+    flex: 1;
+    background-color: #333;
+    /* Fallback/Loading bg */
+    position: relative;
+}
+
+/* Typography */
+h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin: var(--space-md) 0 var(--space-sm) 0;
+    font-weight: 600;
+}
+
+/* Feature List (Details/Summary) */
+.feature-root {
+    margin-top: var(--space-md);
+}
+
+.feature-root details {
+    background: var(--input-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.feature-root summary {
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    user-select: none;
+}
+
+.feature-root summary::-webkit-details-marker {
+    display: none;
+}
+
+.feature-root summary::after {
+    content: '+';
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    transition: transform 0.2s;
+}
+
+.feature-root details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.feature-list-content {
+    padding: 0 var(--space-md) var(--space-md);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    border-top: 1px solid var(--border-color);
+}
+
+.feature-item {
+    margin-top: var(--space-sm);
+}
+
+.f-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+/* Forms & Inputs */
+fieldset {
+    border: 1px solid var(--border-color);
+    padding: var(--space-md);
+    margin: 0;
+    border-radius: var(--radius-md);
+    background: white;
+    margin-bottom: var(--space-md);
+}
+
+legend {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    padding: 0 var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xs);
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: white;
+}
+
+.row {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+.row>div {
+    flex: 1;
+}
+
+.small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: var(--space-xs);
+}
+
+hr {
+    border: none;
+    border-top: 1px dashed var(--border-color);
+    margin: var(--space-md) 0;
+}
+
+/* Custom Checkbox Toggle */
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+    cursor: pointer;
+}
+
+.toggle-wrapper input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 36px;
+    height: 20px;
+    background: #d1d5db;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+
+.toggle-wrapper input[type="checkbox"]::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-wrapper input[type="checkbox"]:checked {
+    background: var(--accent-color);
+}
+
+.toggle-wrapper input[type="checkbox"]:checked::after {
+    transform: translateX(16px);
+}
+
+.toggle-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Results Section */
+#status {
+    padding: var(--space-sm);
+    background: #eff6ff;
+    border-radius: var(--radius-sm);
+    color: #1e40af;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--space-sm);
+}
+
+.highlight {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Measure Label */
+#measureLabel {
+    position: absolute;
+    background: rgba(31, 41, 55, 0.9);
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    pointer-events: none;
+    display: none;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: var(--shadow-md);
+    transform: translate(-50%, -100%);
+    margin-top: -10px;
+}
+
+/* Menu Toggle Button (Mobile) */
+#menuToggle {
+    display: none;
+    /* Hidden by default on desktop */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #menuToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        z-index: 1001;
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.25rem;
+        cursor: pointer;
+        box-shadow: var(--shadow-lg);
+        color: var(--text-primary);
+        padding: 0;
+    }
+
+    #ui {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        /* Hidden */
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 85%;
+        max-width: 320px;
+    }
+
+    #ui.menu-active {
+        transform: translateX(0);
+        /* Shown */
+    }
+}

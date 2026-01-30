@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="避雷設備の回転球体法（JIS A 4201：2003）による保護範囲を3Dで簡易的に可視化・検討できるWebツール。ブラウザ上で動作するため、配置計画をスピーディーに検討できます。初期段階の概略検討や、お客様への説明資料作成、社内での設計案共有などに活用しやすく、避雷設備設計の効率化と品質向上に役立ちます。">
+  <title>避雷設備 回転球体法簡易検討3D可視化ツール Rolling Sphere Method Checker</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="favicon.svg">
+</head>
+
+<body>
+  <div id="measureLabel"></div>
+
+  <button id="menuToggle" aria-label="Menu">☰</button>
+
+  <div id="ui">
+    <div class="app-header">
+      <h2>避雷設備 回転球体法簡易検討3D可視化ツール</h2>
+      <div class="subtitle">Rolling Sphere Method Checker</div>
+      <div class="feature-root">
+        <details>
+          <summary>ツールの特徴</summary>
+          <div class="feature-list-content">
+            <div class="feature-item">
+              <div class="f-title">回転球体法による保護範囲を3D表示</div>
+              <div class="f-desc">建物・設備を立体的に再現し、回転球体法に基づく避雷保護範囲を3Dで可視化できます。</div>
+            </div>
+            <div class="feature-item">
+              <div class="f-title">ブラウザだけで動作するWebツール</div>
+              <div class="f-desc">専用ソフトのインストール不要で、PCのブラウザ上から手軽に利用できます。</div>
+            </div>
+            <div class="feature-item">
+              <div class="f-title">JIS A 4201：2003に準拠した検討</div>
+              <div class="f-desc">JIS A 4201：2003に準拠した回転球体法をベースに、避雷設備の概略検討が行えます。</div>
+            </div>
+            <div class="feature-item">
+              <div class="f-title">初期検討・説明資料に使いやすい簡易シミュレーション</div>
+              <div class="f-desc">詳細設計前の概略検討や、顧客・社内向けの説明資料作成に活用できます。</div>
+            </div>
+            <div class="feature-item">
+              <div class="f-title">平面図では分かりづらい高さ方向の抜けを確認</div>
+              <div class="f-desc">立体表示により、高さ方向の安全距離や保護範囲の「抜け」を確認しやすくなります。</div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+    <h3>条件設定</h3>
+
+    <fieldset>
+      <legend>保護レベル</legend>
+      <select id="radiusSelect">
+        <option value="20">保護レベルⅠ：20m</option>
+        <option value="30" selected>保護レベルⅡ：30m</option>
+        <option value="45">保護レベルⅢ：45m</option>
+        <option value="60">保護レベルⅣ：60m</option>
+      </select>
+      <div class="small" id="radiusInfo"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>受雷部条件</legend>
+      <div class="small">
+        ・XY平面上に受雷部の位置を配置し、<br>
+        ・高さZ（0〜10m）を指定します。<br>
+        ・受雷部は地面(Z=0)から垂直（Z方向）に立っており、有効な先端を全て通る球体を描画します。
+      </div>
+
+      <!-- 針1 -->
+      <div style="margin-top:10px;">
+        <div class="toggle-wrapper">
+          <label for="pin1Enabled" class="toggle-label">受雷部1 有効</label>
+          <input type="checkbox" id="pin1Enabled" checked />
+        </div>
+        <div class="row">
+          <div>
+            <label>X1 (m)
+              <input type="number" id="pin1x" value="0" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>Y1 (m)
+              <input type="number" id="pin1z" value="0" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>高さZ1 (m)
+              <input type="number" id="pin1y" value="5" min="0" max="10" step="0.5" />
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 針2 -->
+      <div style="margin-top:10px;">
+        <div class="toggle-wrapper">
+          <label for="pin2Enabled" class="toggle-label">受雷部2 有効</label>
+          <input type="checkbox" id="pin2Enabled" checked />
+        </div>
+        <div class="row">
+          <div>
+            <label>X2 (m)
+              <input type="number" id="pin2x" value="10" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>Y2 (m)
+              <input type="number" id="pin2z" value="0" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>高さZ2 (m)
+              <input type="number" id="pin2y" value="5" min="0" max="10" step="0.5" />
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 針3 -->
+      <div style="margin-top:10px;">
+        <div class="toggle-wrapper">
+          <label for="pin3Enabled" class="toggle-label">受雷部3 有効</label>
+          <input type="checkbox" id="pin3Enabled" checked />
+        </div>
+        <div class="row">
+          <div>
+            <label>X3 (m)
+              <input type="number" id="pin3x" value="0" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>Y3 (m)
+              <input type="number" id="pin3z" value="10" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>高さZ3 (m)
+              <input type="number" id="pin3y" value="5" min="0" max="10" step="0.5" />
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <!-- 針4 -->
+      <div style="margin-top:10px;">
+        <div class="toggle-wrapper">
+          <label for="pin4Enabled" class="toggle-label">受雷部4 有効</label>
+          <input type="checkbox" id="pin4Enabled" />
+        </div>
+        <div class="row">
+          <div>
+            <label>X4 (m)
+              <input type="number" id="pin4x" value="10" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>Y4 (m)
+              <input type="number" id="pin4z" value="10" step="1" />
+            </label>
+          </div>
+          <div>
+            <label>高さZ4 (m)
+              <input type="number" id="pin4y" value="5" min="0" max="10" step="0.5" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>参考マーカー</legend>
+      <div class="small">
+        ・計算には影響しない目印を表示します。<br>
+      </div>
+      <div class="toggle-wrapper">
+        <label for="refMarkerEnabled" class="toggle-label">参考マーカー 有効</label>
+        <input type="checkbox" id="refMarkerEnabled" />
+      </div>
+      <div class="row">
+        <div>
+          <label>X (m)
+            <input type="number" id="refMarkerX" value="5" step="1" />
+          </label>
+        </div>
+        <div>
+          <label>Y (m)
+            <input type="number" id="refMarkerZ" value="5" step="1" />
+          </label>
+        </div>
+        <div>
+          <label>高さZ (m)
+            <input type="number" id="refMarkerY" value="0" step="0.5" />
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- button id="updateBtn">更新 / Update</button -->
+
+
+    <fieldset>
+      <legend>判定結果</legend>
+      <div class="small" id="status" style="font-weight:bold;"></div>
+      <div class="small highlight">
+        地面からの距離 = <span id="distanceToPlane">-</span> m<br>
+        球体中心座標(X,Y,Z) = <span id="sphereCenter">-</span>
+        <span id="distanceComment" style="margin-left:5px;"></span>
+      </div>
+    </fieldset>
+  </div>
+
+  <div id="viewer"></div>
+
+  <!-- three.js 本体 (0.142.0) -->
+  <script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
+  <!-- OrbitControls (0.142.0) -->
+  <script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script src="./sphereCalculation.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>
