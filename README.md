@@ -1,6 +1,7 @@
 # 避雷設備 回転球体法簡易検討3D可視化ツール (Rolling Sphere Method Checker)
 
 ![License](https://img.shields.io/badge/license-MIT-green)
+[![Contributing](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 ![Standard](https://img.shields.io/badge/Standard-JIS_A_4201:2003-blue)
 ![Technology](https://img.shields.io/badge/Tech-Three.js-orange)
 ![Platform](https://img.shields.io/badge/Platform-Web_Browser-lightgrey)
@@ -20,6 +21,8 @@ JIS A 4201:2003 に準拠した保護レベル（球体半径）を設定し、�
   - [座標系の取り扱い](#座標系の取り扱い)
   - [判定アルゴリズム](#判定アルゴリズム)
 - [開発環境・ライブラリ](#-開発環境ライブラリ)
+- [貢献・コミュニティ](#-貢献コミュニティ-community--contribution)
+- [ライセンス](#-ライセンス-license)
 
 ---
 
@@ -94,6 +97,20 @@ JIS A 4201:2003 に準拠した保護レベル（球体半径）を設定し、�
 
 *   **[Three.js](https://threejs.org/)** (R142) - 3D Graphics Engine
 *   **Vanilla JavaScript (ES6+)** - No heavy frameworks, purely native performance.
+
+---
+
+## 🤝 貢献・コミュニティ (Community & Contribution)
+
+本プロジェクトへの貢献を歓迎します！バグレポート、機能提案、プルリクエストなど、どのような形でも大歓迎です。
+
+*   **[CONTRIBUTING.md](CONTRIBUTING.md)**: 開発への参加方法についてはこちらをご覧ください。
+*   **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)**: コミュニティの行動規範を定義しています。
+*   **[SECURITY.md](SECURITY.md)**: セキュリティ問題の報告方法についてはこちらをご確認ください。
+
+## 📄 ライセンス (License)
+
+本プロジェクトは **[MIT License](LICENSE)** の下で公開されています。
 
 ---
 
