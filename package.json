@@ -1,0 +1,26 @@
+{
+  "name": "rsm-checker",
+  "version": "1.0.0",
+  "description": "Rolling Sphere Method Checker - 3D simulation tool for lightning protection design based on JIS A 4201:2003.",
+  "main": "js/main.js",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lightning-protection",
+    "rolling-sphere-method",
+    "threejs",
+    "simulation",
+    "3d",
+    "jis-a-4201"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.142.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
